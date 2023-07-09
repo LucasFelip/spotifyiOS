@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1A1BE5FF2A5A2F2F00CAD5A6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1BE5FE2A5A2F2F00CAD5A6 /* DetailViewController.swift */; };
+		1A1BE6022A5A3E8400CAD5A6 /* MusicaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1BE6012A5A3E8400CAD5A6 /* MusicaTableViewCell.swift */; };
+		1A1BE6052A5A3F5C00CAD5A6 /* Musica.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1BE6042A5A3F5C00CAD5A6 /* Musica.swift */; };
 		1A4677C92A54D9B000D241A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4677C82A54D9B000D241A5 /* AppDelegate.swift */; };
 		1A4677CB2A54D9B000D241A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4677CA2A54D9B000D241A5 /* SceneDelegate.swift */; };
 		1A4677CD2A54D9B000D241A5 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4677CC2A54D9B000D241A5 /* ListViewController.swift */; };
@@ -17,6 +19,8 @@
 
 /* Begin PBXFileReference section */
 		1A1BE5FE2A5A2F2F00CAD5A6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		1A1BE6012A5A3E8400CAD5A6 /* MusicaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicaTableViewCell.swift; sourceTree = "<group>"; };
+		1A1BE6042A5A3F5C00CAD5A6 /* Musica.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Musica.swift; sourceTree = "<group>"; };
 		1A4677C52A54D9B000D241A5 /* spotifyiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spotifyiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A4677C82A54D9B000D241A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A4677CA2A54D9B000D241A5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +41,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A1BE6032A5A3F3900CAD5A6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1A1BE6042A5A3F5C00CAD5A6 /* Musica.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1A1BE6062A5A3FCD00CAD5A6 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				1A1BE6012A5A3E8400CAD5A6 /* MusicaTableViewCell.swift */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
 		1A4677BC2A54D9B000D241A5 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +76,8 @@
 		1A4677C72A54D9B000D241A5 /* spotifyiOS */ = {
 			isa = PBXGroup;
 			children = (
+				1A1BE6062A5A3FCD00CAD5A6 /* Table */,
+				1A1BE6032A5A3F3900CAD5A6 /* Model */,
 				1A4677C82A54D9B000D241A5 /* AppDelegate.swift */,
 				1A4677CA2A54D9B000D241A5 /* SceneDelegate.swift */,
 				1A4677CC2A54D9B000D241A5 /* ListViewController.swift */,
@@ -140,7 +162,9 @@
 				1A4677CD2A54D9B000D241A5 /* ListViewController.swift in Sources */,
 				1A4677C92A54D9B000D241A5 /* AppDelegate.swift in Sources */,
 				1A4677CB2A54D9B000D241A5 /* SceneDelegate.swift in Sources */,
+				1A1BE6022A5A3E8400CAD5A6 /* MusicaTableViewCell.swift in Sources */,
 				1A1BE5FF2A5A2F2F00CAD5A6 /* DetailViewController.swift in Sources */,
+				1A1BE6052A5A3F5C00CAD5A6 /* Musica.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
