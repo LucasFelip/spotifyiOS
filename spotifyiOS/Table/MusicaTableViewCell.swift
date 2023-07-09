@@ -4,7 +4,7 @@ class MusicaTableViewCell: UITableViewCell {
     private let posicaoLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .darkText
+        label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 45)
         label.numberOfLines = 0
         return label
@@ -28,7 +28,7 @@ class MusicaTableViewCell: UITableViewCell {
     private let artistaLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .darkText
+        label.textColor = .gray
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
@@ -36,7 +36,7 @@ class MusicaTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.backgroundColor = .darkGray
+        contentView.backgroundColor = .secondarySystemBackground
         contentView.addSubview(posicaoLabel)
         contentView.addSubview(musicaImageView)
         contentView.addSubview(nomeLabel)
@@ -57,7 +57,7 @@ class MusicaTableViewCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            musicaImageView.leadingAnchor.constraint(equalTo: posicaoLabel.leadingAnchor, constant: 35),
+            musicaImageView.leadingAnchor.constraint(equalTo: posicaoLabel.leadingAnchor, constant: 55),
             musicaImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             musicaImageView.heightAnchor.constraint(equalToConstant: 60),
             musicaImageView.widthAnchor.constraint(equalToConstant: 60)

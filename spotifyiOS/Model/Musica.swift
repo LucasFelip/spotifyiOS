@@ -5,10 +5,10 @@ class Musica {
     var imagemURL: URL?
     var nome: String
     var artista: String
-    var reproducoes: Int
+    var reproducoes: String
     var duracao: String
 
-    init(posicao: Int, imagemURL: URL?, nome: String, artista: String, reproducoes: Int, duracao: String) {
+    init(posicao: Int, imagemURL: URL?, nome: String, artista: String, reproducoes: String, duracao: String) {
         self.posicao = posicao
         self.imagemURL = imagemURL
         self.nome = nome
@@ -19,7 +19,7 @@ class Musica {
 }
 
 extension Musica {
-    convenience init(posicao: Int, imagemURLString: String?, nome: String, artista: String, reproducao: Int, duracao: String) {
+    convenience init(posicao: Int, imagemURLString: String?, nome: String, artista: String, reproducao: String, duracao: String) {
         let imagemURL = URL(string: imagemURLString ?? "")
         self.init(posicao: posicao, imagemURL: imagemURL, nome: nome, artista: artista, reproducoes: reproducao, duracao: duracao)
     }
