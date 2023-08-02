@@ -41,20 +41,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A1340DE2A79D46D003A2443 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				1A4677CC2A54D9B000D241A5 /* ListViewController.swift */,
+				1A1BE6012A5A3E8400CAD5A6 /* MusicaTableViewCell.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		1A1340DF2A79D47C003A2443 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				1A1BE5FE2A5A2F2F00CAD5A6 /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		1A1BE6032A5A3F3900CAD5A6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				1A1BE6042A5A3F5C00CAD5A6 /* Musica.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		1A1BE6062A5A3FCD00CAD5A6 /* Table */ = {
-			isa = PBXGroup;
-			children = (
-				1A1BE6012A5A3E8400CAD5A6 /* MusicaTableViewCell.swift */,
-			);
-			path = Table;
 			sourceTree = "<group>";
 		};
 		1A4677BC2A54D9B000D241A5 = {
@@ -76,12 +85,11 @@
 		1A4677C72A54D9B000D241A5 /* spotifyiOS */ = {
 			isa = PBXGroup;
 			children = (
-				1A1BE6062A5A3FCD00CAD5A6 /* Table */,
+				1A1340DF2A79D47C003A2443 /* Detail */,
+				1A1340DE2A79D46D003A2443 /* List */,
 				1A1BE6032A5A3F3900CAD5A6 /* Model */,
 				1A4677C82A54D9B000D241A5 /* AppDelegate.swift */,
 				1A4677CA2A54D9B000D241A5 /* SceneDelegate.swift */,
-				1A4677CC2A54D9B000D241A5 /* ListViewController.swift */,
-				1A1BE5FE2A5A2F2F00CAD5A6 /* DetailViewController.swift */,
 				1A4677D12A54D9B100D241A5 /* Assets.xcassets */,
 				1A4677D32A54D9B100D241A5 /* LaunchScreen.storyboard */,
 				1A4677D62A54D9B100D241A5 /* Info.plist */,
@@ -117,7 +125,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					1A4677C42A54D9B000D241A5 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -186,6 +194,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -218,6 +227,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -246,6 +256,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -278,6 +289,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -301,6 +313,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H7MMXQ3XR8;
@@ -308,7 +321,7 @@
 				INFOPLIST_FILE = spotifyiOS/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -329,6 +342,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H7MMXQ3XR8;
@@ -336,7 +350,7 @@
 				INFOPLIST_FILE = spotifyiOS/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

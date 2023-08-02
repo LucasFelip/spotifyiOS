@@ -1,6 +1,10 @@
 import UIKit
 
 class MusicaTableViewCell: UITableViewCell {
+    enum ReuseIdentifier: String {
+        case musicaCell
+    }
+    
     private let posicaoLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -22,6 +26,7 @@ class MusicaTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -34,9 +39,9 @@ class MusicaTableViewCell: UITableViewCell {
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: style, reuseIdentifier: ReuseIdentifier.musicaCell.rawValue)
         
-        contentView.backgroundColor = .secondarySystemBackground
+        contentView.backgroundColor = .darkGray
         contentView.addSubview(posicaoLabel)
         contentView.addSubview(musicaImageView)
         contentView.addSubview(nomeLabel)
@@ -50,7 +55,6 @@ class MusicaTableViewCell: UITableViewCell {
     }
     
     private func setupConstraints() {
-        
         NSLayoutConstraint.activate([
             posicaoLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             posicaoLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
@@ -76,11 +80,19 @@ class MusicaTableViewCell: UITableViewCell {
         ])
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        posicaoLabel.text = nil
+        nomeLabel.text = nil
+        artistaLabel.text = nil
+        musicaImageView.image = nil
+    }
+    
     func configure(with musica: Musica) {
         posicaoLabel.text = "\(musica.posicao)"
         nomeLabel.text = musica.nome
         artistaLabel.text = musica.artista
-        
+
         if let imagemURL = musica.imagemURL {
             DispatchQueue.global().async {
                 if let data = try? Data(contentsOf: imagemURL),
@@ -91,7 +103,8 @@ class MusicaTableViewCell: UITableViewCell {
                 }
             }
         } else {
-            musicaImageView.image = UIImage(named: "placeholder")
+            musicaImageView.image = nil
+            musicaImageView.backgroundColor = .black
         }
     }
 }

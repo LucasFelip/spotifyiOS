@@ -1,26 +1,38 @@
 import UIKit
 
 class Musica {
-    var posicao: Int
-    var imagemURL: URL?
-    var nome: String
-    var artista: String
-    var reproducoes: String
-    var duracao: String
+    let posicao: Int
+    let imagemURL: URL?
+    let nome: String
+    let artista: String
+    let reproducoesString: String
+    let duracao: TimeInterval
 
-    init(posicao: Int, imagemURL: URL?, nome: String, artista: String, reproducoes: String, duracao: String) {
+    init(posicao: Int, imagemURL: URL?, nome: String, artista: String, reproducoesString: String, duracao: TimeInterval) {
         self.posicao = posicao
         self.imagemURL = imagemURL
         self.nome = nome
         self.artista = artista
-        self.reproducoes = reproducoes
+        self.reproducoesString = reproducoesString
         self.duracao = duracao
     }
 }
 
 extension Musica {
-    convenience init(posicao: Int, imagemURLString: String?, nome: String, artista: String, reproducao: String, duracao: String) {
-        let imagemURL = URL(string: imagemURLString ?? "")
-        self.init(posicao: posicao, imagemURL: imagemURL, nome: nome, artista: artista, reproducoes: reproducao, duracao: duracao)
+    convenience init?(posicao: Int, imagemURLString: String?, nome: String, artista: String, reproducoesString: String, duracao: TimeInterval) {
+        if let imagemURLString = imagemURLString, let imagemURL = URL(string: imagemURLString) {
+            self.init(posicao: posicao, imagemURL: imagemURL, nome: nome, artista: artista, reproducoesString: reproducoesString, duracao: duracao)
+        } else {
+            return nil // Retorna nil se a URL da imagem não for válida.
+        }
+    }
+}
+
+extension Musica {
+    var duracaoEmMinutos: String {
+        let duracaoEmSegundos = Double(duracao) 
+        let minutos = Int(duracaoEmSegundos / 60)
+        let segundos = Int(duracaoEmSegundos.truncatingRemainder(dividingBy: 60))
+        return String(format: "%d:%02d", minutos, segundos)
     }
 }
