@@ -53,7 +53,7 @@ class ListViewController: UIViewController {
 
     private func setupContraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32)
         ])
