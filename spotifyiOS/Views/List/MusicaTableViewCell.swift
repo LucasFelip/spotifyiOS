@@ -61,7 +61,7 @@ class MusicaTableViewCell: UITableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            musicaImageView.leadingAnchor.constraint(equalTo: posicaoLabel.leadingAnchor, constant: 55),
+            musicaImageView.leadingAnchor.constraint(equalTo: posicaoLabel.leadingAnchor, constant: 60),
             musicaImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             musicaImageView.heightAnchor.constraint(equalToConstant: 60),
             musicaImageView.widthAnchor.constraint(equalToConstant: 60)
@@ -92,7 +92,7 @@ class MusicaTableViewCell: UITableViewCell {
         posicaoLabel.text = "\(musica.posicao)"
         nomeLabel.text = musica.nome
         artistaLabel.text = musica.artista
-
+        
         if let imagemURL = musica.imagemURL {
             DispatchQueue.global().async {
                 if let data = try? Data(contentsOf: imagemURL),
@@ -103,8 +103,10 @@ class MusicaTableViewCell: UITableViewCell {
                 }
             }
         } else {
-            musicaImageView.image = nil
-            musicaImageView.backgroundColor = .black
+            DispatchQueue.main.async {
+                self.musicaImageView.image = nil
+                self.musicaImageView.backgroundColor = .black
+            }
         }
     }
 }

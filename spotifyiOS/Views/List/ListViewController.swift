@@ -53,7 +53,7 @@ class ListViewController: UIViewController {
 
     private func setupContraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32)
         ])
@@ -97,160 +97,15 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension ListViewController {
-    private static let clientID = "5b76e4ca1a634733bf6e1804b9a301d6"
-    private static let clientSecret = "28593edf5c8f4ef98be6f900311a68e6"
-    private static let baseURL = "https://api.spotify.com/v1/playlists/37i9dQZEVXbMDoHDwVN2tF/tracks?limit=50" // URL para a playlist das 50 melhores músicas
-
-    private func getAuthorizationHeader() -> String {
-        let credentials = "\(ListViewController.clientID):\(ListViewController.clientSecret)"
-        let data = credentials.data(using: .utf8)!
-        let base64Credentials = data.base64EncodedString()
-        return "Basic \(base64Credentials)"
-    }
-}
-
-extension ListViewController {
     private func setupData() {
-        guard let url = URL(string: ListViewController.baseURL) else {
-            print("Erro: URL inválida para a API do Spotify")
-            return
-        }
-
-        getToken { [weak self] token in
-            guard let self = self else { return }
-            guard let token = token else {
-                print("Erro ao obter o token de acesso")
+        SpotifyAPIManager.shared.getTopTracks { [weak self] musicas in
+            guard let self = self, let musicas = musicas else {
                 return
             }
-
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
-            URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-                guard self != nil else { return }
-                if let error = error {
-                    print("Erro na solicitação: \(error)")
-                    return
-                }
-                
-                guard let data = data else {
-                    print("Erro: Nenhum dado recebido da API")
-                    return
-                }
-                
-                do {
-                    let jsonDecoder = JSONDecoder()
-                    let response = try jsonDecoder.decode(SpotifyAPIResponse.self, from: data)
-                    let items = response.items
-                    
-                    // Mapear os dados para o array de objetos Musica
-                    var musicasArray = [Musica]()
-                    for (index, item) in items.enumerated() {
-                        let track = item.track
-                        let imagemURLString = track.album.images.first?.url
-                        let imagemURL = URL(string: imagemURLString ?? "")
-                        let duracao = TimeInterval(track.duration_ms) / 1000
-                        
-                        let musica = Musica(posicao: index + 1,
-                                            imagemURL: imagemURL,
-                                            nome: track.name,
-                                            artista: track.artists.first?.name ?? "",
-                                            reproducoesString: "\(track.popularity) reproduções",
-                                            duracao: duracao)
-                        
-                        musicasArray.append(musica)
-                    }
-                    
-                    // Atualizar o array de musicas e recarregar a tabela
-                    DispatchQueue.main.async { [weak self] in
-                        self?.musicas = musicasArray
-                        self?.tableView.reloadData()
-                    }
-                } catch {
-                    print("Erro ao fazer o parsing dos dados da API: \(error)")
-                }
-            }.resume()
+            DispatchQueue.main.async {
+                self.musicas = musicas
+                self.tableView.reloadData()
+            }
         }
     }
-
-    
-    private func getToken(completion: @escaping (String?) -> Void) {
-        guard let url = URL(string: "https://accounts.spotify.com/api/token") else {
-            print("Erro: URL inválida para obter o token de acesso")
-            completion(nil)
-            return
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        let clientCredentials = "\(ListViewController.clientID):\(ListViewController.clientSecret)"
-        let clientCredentialsData = clientCredentials.data(using: .utf8)!
-        let base64ClientCredentials = clientCredentialsData.base64EncodedString()
-        request.addValue("Basic \(base64ClientCredentials)", forHTTPHeaderField: "Authorization")
-        request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        let body = "grant_type=client_credentials"
-        request.httpBody = body.data(using: .utf8)
-
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Erro ao obter o token de acesso: \(error)")
-                completion(nil)
-                return
-            }
-
-            guard let data = data else {
-                print("Erro: Nenhum dado recebido ao obter o token de acesso")
-                completion(nil)
-                return
-            }
-
-            do {
-                let jsonDecoder = JSONDecoder()
-                let response = try jsonDecoder.decode(TokenResponse.self, from: data)
-                let token = response.access_token
-                completion(token)
-            } catch {
-                print("Erro ao fazer o parsing do token de acesso: \(error)")
-                completion(nil)
-            }
-        }.resume()
-    }
-
-    struct TokenResponse: Codable {
-        let access_token: String
-    }
-
-}
-
-
-struct SpotifyAPIResponse: Codable {
-    let href: String
-    let items: [Item]
-}
-
-struct Item: Codable {
-    let added_at: String
-    let track: Track
-}
-
-struct Track: Codable {
-    let album: Album
-    let artists: [Artist]
-    let duration_ms: Int
-    let name: String
-    let popularity: Int
-}
-
-struct Album: Codable {
-    let images: [Image]
-    let name: String
-}
-
-struct Artist: Codable {
-    let name: String
-}
-
-struct Image: Codable {
-    let url: String
 }

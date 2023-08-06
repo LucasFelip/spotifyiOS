@@ -68,7 +68,18 @@ class DetailViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
-
+    
+    private let spotifyLink: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Spotify", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        button.backgroundColor = .systemGray
+        button.layer.cornerRadius = 8
+        button.addTarget(self, action: #selector(spotifyLinkTapped), for: .touchUpInside)
+        return button
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
@@ -80,6 +91,7 @@ class DetailViewController: UIViewController {
         view.addSubview(reproducoesLabel)
         view.addSubview(titleDuracao)
         view.addSubview(duracaoLabel)
+        view.addSubview(spotifyLink)
 
         setupConstraints()
     }
@@ -123,6 +135,12 @@ class DetailViewController: UIViewController {
             duracaoLabel.topAnchor.constraint(equalTo: titleDuracao.bottomAnchor, constant: 5),
             duracaoLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -45)
         ])
+        
+        NSLayoutConstraint.activate([
+            spotifyLink.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 50),
+            spotifyLink.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -50),
+            spotifyLink.bottomAnchor.constraint(equalTo: duracaoLabel.bottomAnchor, constant: 60)
+        ])
     }
 
     func configure(with musica: Musica) {
@@ -149,5 +167,20 @@ class DetailViewController: UIViewController {
         reproducoesLabel.text = musica.reproducoesString
         duracaoLabel.text = musica.duracaoEmMinutos
     }
+    
+    @objc
+    private func spotifyLinkTapped() {
+        guard let spotifyURL = musica?.spotifyURL else {
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(spotifyURL) {
+            UIApplication.shared.open(spotifyURL, options: [:], completionHandler: nil)
+        } else {
+            print("Não foi possível abrir o link do Spotify.")
+        }
+    }
+
+
 }
 

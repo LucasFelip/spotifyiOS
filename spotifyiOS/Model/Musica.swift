@@ -7,21 +7,23 @@ class Musica {
     let artista: String
     let reproducoesString: String
     let duracao: TimeInterval
+    let spotifyURL: URL?
 
-    init(posicao: Int, imagemURL: URL?, nome: String, artista: String, reproducoesString: String, duracao: TimeInterval) {
+    init(posicao: Int, imagemURL: URL?, nome: String, artista: String, reproducoesString: String, duracao: TimeInterval, spotifyURL: URL?) {
         self.posicao = posicao
         self.imagemURL = imagemURL
         self.nome = nome
         self.artista = artista
         self.reproducoesString = reproducoesString
         self.duracao = duracao
+        self.spotifyURL = spotifyURL
     }
 }
 
 extension Musica {
-    convenience init?(posicao: Int, imagemURLString: String?, nome: String, artista: String, reproducoesString: String, duracao: TimeInterval) {
+    convenience init?(posicao: Int, imagemURLString: String?, nome: String, artista: String, reproducoesString: String, duracao: TimeInterval, spotifyURL: URL?) {
         if let imagemURLString = imagemURLString, let imagemURL = URL(string: imagemURLString) {
-            self.init(posicao: posicao, imagemURL: imagemURL, nome: nome, artista: artista, reproducoesString: reproducoesString, duracao: duracao)
+            self.init(posicao: posicao, imagemURL: imagemURL, nome: nome, artista: artista, reproducoesString: reproducoesString, duracao: duracao, spotifyURL: spotifyURL)
         } else {
             return nil // Retorna nil se a URL da imagem não for válida.
         }
