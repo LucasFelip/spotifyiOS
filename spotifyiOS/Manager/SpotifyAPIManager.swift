@@ -47,12 +47,12 @@ class SpotifyAPIManager {
                     return
                 }
                 
-                /*
-                 if let jsonString = String(data: data, encoding: .utf8) {
+                
+                if let jsonString = String(data: data, encoding: .utf8) {
                     print("Resposta da API:")
                     print("\n\n"+jsonString)
                 }
-                 */
+                 
                 
                 do {
                     let jsonDecoder = JSONDecoder()
@@ -70,7 +70,7 @@ class SpotifyAPIManager {
                                             imagemURL: imagemURL,
                                             nome: track.name,
                                             artista: track.artists.first?.name ?? "",
-                                            reproducoesString: "\(track.popularity) reproduções",
+                                            reproducoesString: "\(track.popularity)",
                                             duracao: duracao,
                                             spotifyURL: URL(string: track.external_urls.spotify))
                         musicasArray.append(musica)
