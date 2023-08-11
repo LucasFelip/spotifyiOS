@@ -1,14 +1,17 @@
 import Foundation
 
-// Função para salvar músicas favoritas
 func salvarMusicasFavoritas(_ musicas: [Musica]) {
+    let musicasFavoritas = musicas.filter { $0.isFavorita }
+    for (index, musica) in musicasFavoritas.enumerated() {
+        musica.posicaoFavorita = index + 1
+    }
+    
     let encoder = JSONEncoder()
     if let encodedData = try? encoder.encode(musicas) {
         UserDefaults.standard.set(encodedData, forKey: "MusicasFavoritas")
     }
 }
 
-// Função para carregar músicas favoritas
 func carregarMusicasFavoritas() -> [Musica] {
     if let savedData = UserDefaults.standard.data(forKey: "MusicasFavoritas") {
         let decoder = JSONDecoder()

@@ -75,8 +75,8 @@ class ListViewController: UIViewController {
 extension ListViewController {
     private func toggleFavoriteStatus(for indexPath: IndexPath) {
         musicas[indexPath.row].toggleFavorita()
-        tableView.reloadRows(at: [indexPath], with: .none)
         salvarMusicasFavoritas(musicas.filter { $0.isFavorita })
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
 }
 
@@ -111,7 +111,6 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension ListViewController {
     private func setupData() {
-        // Criar instâncias de Musica e adicionar à array musicas
         let musica1 = Musica(posicao: 1, imagemURL: URL(string: "https://i.scdn.co/image/ab67616d0000b273d67feb28d4f481dac9ae1a8d"), nome: "AmEN!", artista: "Bring Me The Horizon", reproducoesString: "9.303.364", duracao: TimeInterval(189))
         musicas.append(musica1)
         
@@ -158,5 +157,14 @@ extension ListViewController {
         musicas.append(musica15)
         
         let musica16 = Musica(posicao: 16, imagemURL: URL(string: "https://i.scdn.co/image/ab67616d0000b2730b73608b678f169d3c8f35f0"), nome: "Take Me Back To Eden", artista: "Sleep Token", reproducoesString: "11.898.918", duracao: TimeInterval(500))
-        musicas.append(musica16)    }
+        musicas.append(musica16)
+        
+        let favoritasSalvas = carregarMusicasFavoritas()
+        
+        for (index, _) in musicas.enumerated() {
+            if favoritasSalvas.contains(where: { $0.nome == musicas[index].nome }) {
+                musicas[index].isFavorita = true
+            }
+        }
+    }
 }

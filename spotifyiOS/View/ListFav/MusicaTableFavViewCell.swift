@@ -89,7 +89,7 @@ class MusicaTableFavViewCell: UITableViewCell {
     }
     
     func configure(with musica: Musica) {
-        posicaoLabel.text = "\(musica.posicao)"
+        posicaoLabel.text = "\(musica.posicaoFavorita)"
         nomeLabel.text = musica.nome
         artistaLabel.text = musica.artista
         

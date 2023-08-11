@@ -72,13 +72,18 @@ class ListFavViewController: UIViewController {
     
     private func loadFavoritas() {
         favoritas = musicas.filter { $0.isFavorita }
-        print("Total de músicas favoritas: \(favoritas.count)")
+        favoritas.sort { $0.posicao < $1.posicao }
         tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        var posicaoMusicaFavorita = 0
         favoritas = carregarMusicasFavoritas()
+        for (index, _) in favoritas.enumerated() {
+            posicaoMusicaFavorita += 1
+            favoritas[index].posicaoFavorita = posicaoMusicaFavorita
+        }
         tableView.reloadData()
     }
 }

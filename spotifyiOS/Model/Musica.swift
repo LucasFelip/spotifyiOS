@@ -7,8 +7,9 @@ class Musica: Codable {
     let artista: String
     let reproducoesString: String
     let duracao: TimeInterval
-    public var isFavorita: Bool = false
-
+    var isFavorita: Bool = false
+    var posicaoFavorita: Int = 0
+    
     init(posicao: Int, imagemURL: URL?, nome: String, artista: String, reproducoesString: String, duracao: TimeInterval) {
         self.posicao = posicao
         self.imagemURL = imagemURL
