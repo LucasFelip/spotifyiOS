@@ -80,7 +80,9 @@ class DetailViewController: UIViewController {
         view.addSubview(reproducoesLabel)
         view.addSubview(titleDuracao)
         view.addSubview(duracaoLabel)
-
+        
+        navigationController?.navigationBar.tintColor = .white
+        
         setupConstraints()
     }
 
