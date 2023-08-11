@@ -1,7 +1,7 @@
 import UIKit
 
 class ListViewController: UIViewController {
-    private var musicas = [Musica]()
+    var musicas = [Musica]()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -72,11 +72,24 @@ class ListViewController: UIViewController {
     }
 }
 
+extension ListViewController {
+    private func toggleFavoriteStatus(for indexPath: IndexPath) {
+        musicas[indexPath.row].toggleFavorita()
+        tableView.reloadRows(at: [indexPath], with: .none)
+        salvarMusicasFavoritas(musicas.filter { $0.isFavorita })
+    }
+}
+
 extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MusicaCell", for: indexPath) as! MusicaTableViewCell
         let musica = musicas[indexPath.row]
         cell.configure(with: musica)
+        
+        cell.favoritarButtonTapped = {
+            self.toggleFavoriteStatus(for: indexPath)
+        }
+        
         return cell
     }
     

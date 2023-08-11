@@ -1,6 +1,6 @@
 import UIKit
 
-class MusicaTableViewCell: UITableViewCell {
+class MusicaTableFavViewCell: UITableViewCell {
     enum ReuseIdentifier: String {
         case musicaCell
     }
@@ -70,13 +70,13 @@ class MusicaTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             nomeLabel.leadingAnchor.constraint(equalTo: musicaImageView.leadingAnchor, constant: 65),
             nomeLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            nomeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+            nomeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([
             artistaLabel.bottomAnchor.constraint(equalTo: nomeLabel.bottomAnchor,constant: 16),
             artistaLabel.leadingAnchor.constraint(equalTo: musicaImageView.leadingAnchor, constant: 65),
-            artistaLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+            artistaLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30)
         ])
     }
     
@@ -92,7 +92,7 @@ class MusicaTableViewCell: UITableViewCell {
         posicaoLabel.text = "\(musica.posicao)"
         nomeLabel.text = musica.nome
         artistaLabel.text = musica.artista
-
+        
         if let imagemURL = musica.imagemURL {
             DispatchQueue.global().async {
                 if let data = try? Data(contentsOf: imagemURL),
