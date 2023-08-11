@@ -1,7 +1,8 @@
 import UIKit
 
-class ListViewController: UIViewController {
-    var musicas = [Musica]()
+class ListFavViewController: UIViewController {
+    var musicas: [Musica] = []
+    private var favoritas = [Musica]()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -10,7 +11,7 @@ class ListViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 42)
         label.textColor = .gray
         label.numberOfLines = 0
-        label.text = "Top Músicas"
+        label.text = "Top Músicas Favoritas"
         return label
     }()
     
@@ -29,29 +30,28 @@ class ListViewController: UIViewController {
         table.rowHeight = 70
         return table
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
-        setupData()
         setupTableView()
         addViewHierarchy()
-        setupContraints()
+        setupConstraints()
     }
-
+    
     private func setupTableView() {
-        tableView.register(MusicaTableViewCell.self, forCellReuseIdentifier: "MusicaCell")
+        tableView.register(MusicaTableFavViewCell.self, forCellReuseIdentifier: "MusicaCell")
         tableView.dataSource = self
         tableView.delegate = self
     }
-
+    
     private func addViewHierarchy() {
         view.addSubview(titleLabel)
         view.addSubview(barraView)
         view.addSubview(tableView)
     }
-
-    private func setupContraints() {
+    
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
@@ -70,31 +70,35 @@ class ListViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-}
-
-extension ListViewController {
-    private func toggleFavoriteStatus(for indexPath: IndexPath) {
-        musicas[indexPath.row].toggleFavorita()
-        salvarMusicasFavoritas(musicas.filter { $0.isFavorita })
-        tableView.reloadRows(at: [indexPath], with: .none)
+    
+    private func loadFavoritas() {
+        favoritas = musicas.filter { $0.isFavorita }
+        favoritas.sort { $0.posicao < $1.posicao }
+        tableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        var posicaoMusicaFavorita = 0
+        favoritas = carregarMusicasFavoritas()
+        for (index, _) in favoritas.enumerated() {
+            posicaoMusicaFavorita += 1
+            favoritas[index].posicaoFavorita = posicaoMusicaFavorita
+        }
+        tableView.reloadData()
     }
 }
 
-extension ListViewController: UITableViewDataSource, UITableViewDelegate {
+extension ListFavViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MusicaCell", for: indexPath) as! MusicaTableViewCell
-        let musica = musicas[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MusicaCell", for: indexPath) as! MusicaTableFavViewCell
+        let musica = favoritas[indexPath.row]
         cell.configure(with: musica)
-        
-        cell.favoritarButtonTapped = {
-            self.toggleFavoriteStatus(for: indexPath)
-        }
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return musicas.count
+        return favoritas.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -102,31 +106,9 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedMusica = musicas[indexPath.row]
+        let selectedMusica = favoritas[indexPath.row]
         let detailViewController = DetailViewController()
         detailViewController.configure(with: selectedMusica)
         navigationController?.pushViewController(detailViewController, animated: true)
-    }
-}
-
-extension ListViewController {
-    private func setupData() {
-        SpotifyAPIRequest.shared.getTopTracks { [weak self] musicas in
-            guard let self = self, let musicas = musicas else {
-                return
-            }
-            DispatchQueue.main.async {
-                self.musicas = musicas
-                self.tableView.reloadData()
-            }
-            
-            let favoritasSalvas = carregarMusicasFavoritas()
-                    
-            for (index, _) in musicas.enumerated() {
-                if favoritasSalvas.contains(where: { $0.nome == musicas[index].nome } ) {
-                    musicas[index].isFavorita = true
-                }
-            }
-        }
     }
 }

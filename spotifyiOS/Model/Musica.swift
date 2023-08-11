@@ -1,6 +1,6 @@
 import UIKit
 
-class Musica {
+class Musica: Codable {
     let posicao: Int
     let imagemURL: URL?
     let nome: String
@@ -8,6 +8,8 @@ class Musica {
     let reproducoesString: String
     let duracao: TimeInterval
     let spotifyURL: URL?
+    var isFavorita: Bool = false
+    var posicaoFavorita: Int = 0
 
     init(posicao: Int, imagemURL: URL?, nome: String, artista: String, reproducoesString: String, duracao: TimeInterval, spotifyURL: URL?) {
         self.posicao = posicao
@@ -36,5 +38,17 @@ extension Musica {
         let minutos = Int(duracaoEmSegundos / 60)
         let segundos = Int(duracaoEmSegundos.truncatingRemainder(dividingBy: 60))
         return String(format: "%d:%02d", minutos, segundos)
+    }
+}
+
+extension Musica {
+    func toggleFavorita() {
+        self.isFavorita.toggle()
+    }
+}
+
+extension Musica {
+    enum CodingKeys: String, CodingKey {
+        case posicao, imagemURL, nome, artista, reproducoesString, duracao, spotifyURL, isFavorita
     }
 }

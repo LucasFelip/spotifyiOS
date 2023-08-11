@@ -92,6 +92,8 @@ class DetailViewController: UIViewController {
         view.addSubview(titleDuracao)
         view.addSubview(duracaoLabel)
         view.addSubview(spotifyLink)
+        
+        navigationController?.navigationBar.tintColor = .white
 
         setupConstraints()
     }
