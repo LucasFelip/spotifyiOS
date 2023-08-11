@@ -42,6 +42,7 @@ class ListFavViewController: UIViewController {
     private func setupTableView() {
         tableView.register(MusicaTableFavViewCell.self, forCellReuseIdentifier: "MusicaCell")
         tableView.dataSource = self
+        tableView.delegate = self
     }
     
     private func addViewHierarchy() {
@@ -88,7 +89,7 @@ class ListFavViewController: UIViewController {
     }
 }
 
-extension ListFavViewController: UITableViewDataSource {
+extension ListFavViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MusicaCell", for: indexPath) as! MusicaTableFavViewCell
         let musica = favoritas[indexPath.row]
@@ -102,5 +103,12 @@ extension ListFavViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedMusica = favoritas[indexPath.row]
+        let detailViewController = DetailViewController()
+        detailViewController.configure(with: selectedMusica)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

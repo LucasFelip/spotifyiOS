@@ -25,7 +25,7 @@ extension Musica {
         if let imagemURLString = imagemURLString, let imagemURL = URL(string: imagemURLString) {
             self.init(posicao: posicao, imagemURL: imagemURL, nome: nome, artista: artista, reproducoesString: reproducoesString, duracao: duracao)
         } else {
-            return nil // Retorna nil se a URL da imagem não for válida.
+            return nil
         }
     }
 }
