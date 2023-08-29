@@ -74,8 +74,20 @@ class ListViewController: UIViewController {
 
 extension ListViewController {
     private func toggleFavoriteStatus(for indexPath: IndexPath) {
-        musicas[indexPath.row].toggleFavorita()
-        salvarMusicasFavoritas(musicas.filter { $0.isFavorita })
+        let musica = musicas[indexPath.row]
+        musica.toggleFavorita()
+        if musica.isFavorita {
+            if !carregarMusicasFavoritas().contains(where: { $0.nome == musica.nome }) {
+                var favoritasSalvas = carregarMusicasFavoritas()
+                favoritasSalvas.append(musica)
+                salvarMusicasFavoritas(favoritasSalvas)
+            }
+        } else {
+            var favoritasSalvas = carregarMusicasFavoritas()
+            favoritasSalvas.removeAll { $0.nome == musica.nome }
+            salvarMusicasFavoritas(favoritasSalvas)
+        }
+        musicas[indexPath.row] = musica
         tableView.reloadRows(at: [indexPath], with: .none)
     }
 }
@@ -111,13 +123,20 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension ListViewController {
     private func setupData() {
-        SpotifyAPIRequest.shared.getTopTracks { [weak self] musicas in
+        GetTopTracks.shared.getTopTracks { [weak self] musicas in
             guard let self = self, let musicas = musicas else {
                 return
             }
             DispatchQueue.main.async {
-                self.musicas = musicas
-                self.tableView.reloadData()
+                if !musicas.isEmpty {
+                    self.musicas = musicas
+                    self.tableView.reloadData()
+                } else {
+                    let alert = UIAlertController(title: "Erro", message: "Não foi possível carregar as músicas. Por favor, tente novamente mais tarde.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    self.tableView.reloadData()
+                }
             }
             
             let favoritasSalvas = carregarMusicasFavoritas()

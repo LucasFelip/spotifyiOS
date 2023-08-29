@@ -1,9 +1,9 @@
 import Foundation
 
-class SpotifyAPIRequest {
-    static let shared = SpotifyAPIRequest()
+class GetTopTracks {
+    static let shared = GetTopTracks()
     
-    private let baseURL = "https://api.spotify.com/v1/playlists/37i9dQZEVXbMDoHDwVN2tF/tracks?limit=50" // URL para a playlist das 50 melhores músicas
+    private let baseURL = "https://api.spotify.com/v1/playlists/37i9dQZEVXbMDoHDwVN2tF/tracks?limit=50"
     
     private init() {}
     
@@ -21,11 +21,11 @@ class SpotifyAPIRequest {
                 completion(nil)
                 return
             }
-
+            
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
+            
             URLSession.shared.dataTask(with: request) { data, _, error in
                 if let error = error {
                     print("Erro na solicitação: \(error)")

@@ -15,8 +15,8 @@
 		1A4677CD2A54D9B000D241A5 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4677CC2A54D9B000D241A5 /* ListViewController.swift */; };
 		1A4677D22A54D9B100D241A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A4677D12A54D9B100D241A5 /* Assets.xcassets */; };
 		1A4677D52A54D9B100D241A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A4677D32A54D9B100D241A5 /* LaunchScreen.storyboard */; };
-		1A5F56372A7F247C0094F836 /* SpotifyAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F56362A7F247C0094F836 /* SpotifyAPIManager.swift */; };
 		1A5F56392A7F2A400094F836 /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F56382A7F2A400094F836 /* SpotifyResponse.swift */; };
+		1A9214F12A902EC700121A98 /* GetTopTracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9214F02A902EC700121A98 /* GetTopTracks.swift */; };
 		1A96A1322A86B9B4003AA7CF /* SpotifyAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A96A1312A86B9B4003AA7CF /* SpotifyAuth.swift */; };
 		1A96A1342A86BA74003AA7CF /* PersistenceLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A96A1332A86BA74003AA7CF /* PersistenceLocal.swift */; };
 		1A96A1372A86BCA7003AA7CF /* ListFavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A96A1362A86BCA7003AA7CF /* ListFavViewController.swift */; };
@@ -34,8 +34,8 @@
 		1A4677D12A54D9B100D241A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A4677D42A54D9B100D241A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A4677D62A54D9B100D241A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1A5F56362A7F247C0094F836 /* SpotifyAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAPIManager.swift; sourceTree = "<group>"; };
 		1A5F56382A7F2A400094F836 /* SpotifyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponse.swift; sourceTree = "<group>"; };
+		1A9214F02A902EC700121A98 /* GetTopTracks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTopTracks.swift; sourceTree = "<group>"; };
 		1A96A1312A86B9B4003AA7CF /* SpotifyAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuth.swift; sourceTree = "<group>"; };
 		1A96A1332A86BA74003AA7CF /* PersistenceLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceLocal.swift; sourceTree = "<group>"; };
 		1A96A1362A86BCA7003AA7CF /* ListFavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFavViewController.swift; sourceTree = "<group>"; };
@@ -110,10 +110,18 @@
 			path = spotifyiOS;
 			sourceTree = "<group>";
 		};
+		1A9214ED2A902E2100121A98 /* SpotifyManager */ = {
+			isa = PBXGroup;
+			children = (
+				1A9214F02A902EC700121A98 /* GetTopTracks.swift */,
+			);
+			path = SpotifyManager;
+			sourceTree = "<group>";
+		};
 		1A96A1302A86B968003AA7CF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				1A5F56362A7F247C0094F836 /* SpotifyAPIManager.swift */,
+				1A9214ED2A902E2100121A98 /* SpotifyManager */,
 				1A96A1312A86B9B4003AA7CF /* SpotifyAuth.swift */,
 				1A96A1332A86BA74003AA7CF /* PersistenceLocal.swift */,
 			);
@@ -211,10 +219,10 @@
 			files = (
 				1A96A1322A86B9B4003AA7CF /* SpotifyAuth.swift in Sources */,
 				1A96A1372A86BCA7003AA7CF /* ListFavViewController.swift in Sources */,
-				1A5F56372A7F247C0094F836 /* SpotifyAPIManager.swift in Sources */,
 				1A4677CD2A54D9B000D241A5 /* ListViewController.swift in Sources */,
 				1A4677C92A54D9B000D241A5 /* AppDelegate.swift in Sources */,
 				1A96A1392A86BCEC003AA7CF /* MusicaTableFavViewCell.swift in Sources */,
+				1A9214F12A902EC700121A98 /* GetTopTracks.swift in Sources */,
 				1A4677CB2A54D9B000D241A5 /* SceneDelegate.swift in Sources */,
 				1A96A1342A86BA74003AA7CF /* PersistenceLocal.swift in Sources */,
 				1A1BE6022A5A3E8400CAD5A6 /* MusicaTableViewCell.swift in Sources */,

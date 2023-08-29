@@ -80,6 +80,7 @@ class DetailViewController: UIViewController {
         button.addTarget(self, action: #selector(spotifyLinkTapped), for: .touchUpInside)
         return button
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
