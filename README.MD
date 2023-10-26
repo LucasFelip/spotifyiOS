@@ -1,3 +1,6 @@
+> **Note**
+> Este projeto passou por um rework significativo visando melhorias substanciais. O rework inclui a migração do UIKIT para SwiftUI, reorganização do projeto e outras otimizações. Você pode encontrar o projeto rework em [neste repositório](https://github.com/LucasFelip/TopMusic.git), e não no repositório atual.
+
 # Top Músicas App - Dados Dinamicos 
 
 Um aplicativo iOS para exibir listas de músicas e suas informações detalhadas.
